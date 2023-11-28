@@ -9,12 +9,18 @@
         <FormInput
             v-model:value="settings.fontColor"
             @update:value="updateFontColor"
+            type="color"
+            class="font-color"
+            colorInput="font"
         >
             Kolor czcionki
         </FormInput>
         <FormInput
             v-model:value="settings.pageBackground"
             @update:value="updateBackground"
+            type="color"
+            class="background-color"
+            colorInput="bg"
         >
             Kolor tła strony
         </FormInput>
