@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/settings">Ustawienia</router-link>
   </nav>
   <router-view/>
 </template>
@@ -32,6 +32,9 @@ export default defineComponent({
 
 nav {
   padding: 30px;
+  position: sticky;
+  top: 0;
+  background: #fff;
 
   a {
     font-weight: bold;
