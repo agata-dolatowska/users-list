@@ -1,32 +1,34 @@
 import { defineStore } from "pinia";
 import UserType from '@/classes/User'
+import Settings from "@/classes/Settings";
 
 export type RootState = {
     users: UserType[];
-    fontSize: number;
-    fontColor: string
-    pageBackground: string
+    settings: Settings
   };
 
 export const useStore = defineStore('store', {
     state: () => ({
         users: [],
-        fontSize: 16,
-        fontColor: '#000',
-        pageBackground: '#fff'
+        settings: {
+            fontSize: 16,
+            fontColor: '#000',
+            pageBackground: '#fff'
+        }
     } as RootState),
     actions: {
         saveUsers(newUsers: UserType[]) {
             this.users = newUsers
         },
-        saveFontSize(size: number) {
-            this.fontSize = size
+        saveSettings(settings: Settings) {
+            this.settings = settings
         },
-        saveFontColor(color: string) {
-            this.fontColor = color
-        },
-        savePageBg(color: string) {
-            this.pageBackground = color
+        clearSettings() {
+            this.settings = {
+                fontSize: 16,
+                fontColor: '#000',
+                pageBackground: '#fff'
+            }
         }
     },
     persist: true

@@ -14,9 +14,9 @@ export default defineComponent({
     setup() {
       onMounted (() => {
         const store = useStore()
-        document.documentElement.style.setProperty('--font-size', store.fontSize + 'px');
-        document.documentElement.style.setProperty('--font-color', store.fontColor);
-        document.documentElement.style.setProperty('--bg-color', store.pageBackground);
+        document.documentElement.style.setProperty('--font-size', store.settings.fontSize + 'px');
+        document.documentElement.style.setProperty('--font-color', store.settings.fontColor);
+        document.documentElement.style.setProperty('--bg-color', store.settings.pageBackground);
       })
     }
   })

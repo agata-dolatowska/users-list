@@ -1,19 +1,20 @@
 <template>
     <div>
         <FormInput
-            v-if="fontSize"
-            v-model:value="fontSize"
+            v-model:value="settings.fontSize"
             @update:value="updateFontSize"
         >
             Rozmiar czcionki
         </FormInput>
         <FormInput
-            v-model:value="fontColor"
+            v-model:value="settings.fontColor"
+            @update:value="updateFontColor"
         >
             Kolor czcionki
         </FormInput>
         <FormInput
-            v-model:value="pageBackground"
+            v-model:value="settings.pageBackground"
+            @update:value="updateBackground"
         >
             Kolor tła strony
         </FormInput>
@@ -21,9 +22,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, reactive, onMounted, watch } from 'vue';
 import { useStore } from '@/store'
 import FormInput from '@/components/FormInput.vue'
+import Settings from '@/classes/Settings'
 
 export default defineComponent({
     components: {
@@ -32,27 +34,44 @@ export default defineComponent({
     setup() {
         const store = useStore()
 
-        const fontSize = ref()
-        const fontColor = ref()
-        const pageBackground = ref()
+        let settings = reactive<Settings>({
+            fontSize: 16,
+            fontColor: '',
+            pageBackground: ''
+        })
 
-        const updateFontSize = (size: any) => {
-            store.saveFontSize(size)
-            fontSize.value = size
-            document.documentElement.style.setProperty('--font-size', fontSize.value + 'px');
+        const updateFontSize = (fontSize: any) => {
+            settings.fontSize = fontSize
+        }
+        const updateFontColor = (fontSize: any) => {
+            settings.fontColor = fontSize
+        }
+        const updateBackground = (fontSize: any) => {
+            settings.pageBackground = fontSize
+        }
+
+        watch(settings, (value) => {
+            updateSettings()
+        });
+
+        const updateSettings = () => {
+            store.saveSettings(settings)
+            document.documentElement.style.setProperty('--font-size', settings.fontSize + 'px');
+            document.documentElement.style.setProperty('--font-color', settings.fontColor);
+            document.documentElement.style.setProperty('--bg-color', settings.pageBackground);
         }
 
         onMounted(() => {
-            fontSize.value = store.fontSize
-            fontColor.value = store.fontColor
-            pageBackground.value = store.pageBackground
+            settings.fontSize = store.settings.fontSize
+            settings.fontColor = store.settings.fontColor
+            settings.pageBackground = store.settings.pageBackground
         })
 
         return {
-            fontSize,
-            fontColor,
-            pageBackground,
+            settings,
             updateFontSize,
+            updateFontColor,
+            updateBackground,
             store
         }
     }
