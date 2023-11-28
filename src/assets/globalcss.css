@@ -1,0 +1,19 @@
+:root {
+  --font-size: 16px;
+  --font-color: #000;
+  --bg-color: #fff;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+p,
+a,
+li,
+a,
+label,
+input {
+  font-size: var(--font-size);
+  color: var(--font-color);
+}
