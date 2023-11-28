@@ -3,4 +3,5 @@ export default interface UserType {
     first_name: string
     last_name: string
     id: number
+    email: string
 }

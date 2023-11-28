@@ -32,6 +32,9 @@ export default defineComponent({
 
 nav {
   padding: 30px;
+  position: sticky;
+  top: 0;
+  background: #fff;
 
   a {
     font-weight: bold;
