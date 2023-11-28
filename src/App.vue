@@ -6,6 +6,21 @@
   <router-view/>
 </template>
 
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue';
+import { useStore } from '@/store'
+
+export default defineComponent({
+    setup() {
+      onMounted (() => {
+        const store = useStore()
+        document.documentElement.style.setProperty('--font-size', store.fontSize + 'px');
+        document.documentElement.style.setProperty('--font-color', store.fontColor);
+        document.documentElement.style.setProperty('--bg-color', store.pageBackground);
+      })
+    }
+  })
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
